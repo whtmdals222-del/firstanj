@@ -110,11 +110,11 @@ const Button = ({
   ...props 
 }: React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' }) => {
   const variants = {
-    primary: 'bg-purple-600 text-white hover:bg-purple-700 shadow-[0_0_15px_rgba(138,43,226,0.4)]',
-    secondary: 'bg-zinc-800 text-purple-400 hover:bg-zinc-700 border border-purple-900/30',
-    outline: 'bg-transparent border border-purple-600 text-purple-500 hover:bg-purple-600/10',
-    ghost: 'bg-transparent text-zinc-400 hover:text-white hover:bg-zinc-800',
-    danger: 'bg-red-900/20 text-red-500 border border-red-900/30 hover:bg-red-900/30'
+    primary: 'bg-red-600 text-white hover:bg-red-700 shadow-[0_0_15px_rgba(220,38,38,0.4)]',
+    secondary: 'bg-sky-100 text-red-600 hover:bg-sky-200 border border-red-200/30',
+    outline: 'bg-transparent border border-red-600 text-red-600 hover:bg-red-600/10',
+    ghost: 'bg-transparent text-slate-500 hover:text-slate-900 hover:bg-sky-100',
+    danger: 'bg-red-50 text-red-600 border border-red-100 hover:bg-red-100'
   };
   
   return (
@@ -133,7 +133,7 @@ const Button = ({
 
 const Card = ({ children, className, onClick }: { children: React.ReactNode; className?: string; onClick?: () => void }) => (
   <div 
-    className={cn('bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden backdrop-blur-sm', className)}
+    className={cn('bg-white border border-sky-100 rounded-2xl overflow-hidden shadow-sm', className)}
     onClick={onClick}
   >
     {children}
@@ -146,7 +146,7 @@ const SectionTitle = ({ title, subtitle }: { title: string; subtitle?: string })
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight"
+      className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight"
     >
       {title}
     </motion.h2>
@@ -156,12 +156,12 @@ const SectionTitle = ({ title, subtitle }: { title: string; subtitle?: string })
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.1 }}
-        className="text-zinc-400 max-w-2xl mx-auto"
+        className="text-slate-600 max-w-2xl mx-auto"
       >
         {subtitle}
       </motion.p>
     )}
-    <div className="w-20 h-1 bg-purple-600 mx-auto mt-6 rounded-full shadow-[0_0_10px_rgba(138,43,226,0.8)]" />
+    <div className="w-20 h-1 bg-red-600 mx-auto mt-6 rounded-full shadow-[0_0_10px_rgba(220,38,38,0.8)]" />
   </div>
 );
 
@@ -239,11 +239,11 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="min-h-screen bg-sky-50 flex items-center justify-center">
         <div className="relative">
-          <div className="w-16 h-16 border-4 border-purple-900/30 border-t-purple-600 rounded-full animate-spin" />
+          <div className="w-16 h-16 border-4 border-red-100 border-t-red-600 rounded-full animate-spin" />
           <div className="absolute inset-0 flex items-center justify-center">
-            <Flame className="w-6 h-6 text-purple-500 animate-pulse" />
+            <Flame className="w-6 h-6 text-red-500 animate-pulse" />
           </div>
         </div>
       </div>
@@ -251,17 +251,17 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-zinc-300 font-sans selection:bg-purple-600/30 selection:text-purple-200">
+    <div className="min-h-screen bg-sky-50 text-slate-700 font-sans selection:bg-red-600/30 selection:text-red-900">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-zinc-800/50">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-sky-100">
         <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveTab('home')}>
-            <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-indigo-700 rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(138,43,226,0.5)]">
+            <div className="w-10 h-10 bg-gradient-to-br from-red-600 to-orange-700 rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(220,38,38,0.5)]">
               <Shield className="text-white w-6 h-6" />
             </div>
             <div>
               <h1 className="text-xl font-bold text-white tracking-tight leading-none">퍼스트안전</h1>
-              <p className="text-[10px] text-purple-500 font-medium tracking-widest uppercase mt-1">Lifelong Education</p>
+              <p className="text-[10px] text-red-500 font-medium tracking-widest uppercase mt-1">Lifelong Education</p>
             </div>
           </div>
 
@@ -277,8 +277,8 @@ export default function App() {
                 key={item.id}
                 onClick={() => setActiveTab(item.id as any)}
                 className={cn(
-                  'text-sm font-medium transition-colors hover:text-purple-400',
-                  activeTab === item.id ? 'text-purple-500' : 'text-zinc-400'
+                  'text-sm font-medium transition-colors hover:text-red-600',
+                  activeTab === item.id ? 'text-red-600' : 'text-slate-500'
                 )}
               >
                 {item.label}
@@ -288,8 +288,8 @@ export default function App() {
               <button
                 onClick={() => setActiveTab('admin')}
                 className={cn(
-                  'text-sm font-medium flex items-center gap-2 transition-colors hover:text-purple-400',
-                  activeTab === 'admin' ? 'text-purple-500' : 'text-zinc-400'
+                  'text-sm font-medium flex items-center gap-2 transition-colors hover:text-red-600',
+                  activeTab === 'admin' ? 'text-red-600' : 'text-slate-500'
                 )}
               >
                 <Settings className="w-4 h-4" />
@@ -302,8 +302,8 @@ export default function App() {
             {user ? (
               <div className="flex items-center gap-4">
                 <div className="hidden sm:flex flex-col items-end">
-                  <span className="text-xs text-zinc-500">반갑습니다</span>
-                  <span className="text-sm font-medium text-white">{profile?.displayName || user.email}</span>
+                  <span className="text-xs text-slate-400">반갑습니다</span>
+                  <span className="text-sm font-medium text-slate-900">{profile?.displayName || user.email}</span>
                 </div>
                 <Button variant="ghost" className="p-2" onClick={logout}>
                   <LogOut className="w-5 h-5" />
@@ -315,7 +315,7 @@ export default function App() {
                 로그인
               </Button>
             )}
-            <button className="md:hidden p-2 text-zinc-400" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <button className="md:hidden p-2 text-slate-500" onClick={() => setIsMenuOpen(!isMenuOpen)}>
               {isMenuOpen ? <X /> : <Menu />}
             </button>
           </div>
@@ -329,7 +329,7 @@ export default function App() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-black pt-24 px-4 md:hidden"
+            className="fixed inset-0 z-40 bg-sky-50 pt-24 px-4 md:hidden"
           >
             <div className="flex flex-col gap-6">
               {[
@@ -341,7 +341,7 @@ export default function App() {
                 <button
                   key={item.id}
                   onClick={() => { setActiveTab(item.id as any); setIsMenuOpen(false); }}
-                  className="text-2xl font-bold text-left text-zinc-400 hover:text-purple-500"
+                  className="text-2xl font-bold text-left text-slate-500 hover:text-red-600"
                 >
                   {item.label}
                 </button>
@@ -349,7 +349,7 @@ export default function App() {
               {isAdmin && (
                 <button
                   onClick={() => { setActiveTab('admin'); setIsMenuOpen(false); }}
-                  className="text-2xl font-bold text-left text-purple-600"
+                  className="text-2xl font-bold text-left text-red-600"
                 >
                   관리자 대시보드
                 </button>
@@ -369,55 +369,55 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-zinc-950 border-t border-zinc-900 pt-20 pb-10">
+      <footer className="bg-sky-100 border-t border-sky-200 pt-20 pb-10">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
             <div className="col-span-1 md:col-span-2">
               <div className="flex items-center gap-3 mb-6">
-                <Shield className="text-purple-600 w-8 h-8" />
-                <h2 className="text-2xl font-bold text-white">퍼스트안전평생교육원</h2>
+                <Shield className="text-red-600 w-8 h-8" />
+                <h2 className="text-2xl font-bold text-slate-900">퍼스트안전평생교육원</h2>
               </div>
-              <p className="text-zinc-500 max-w-md mb-8 leading-relaxed">
+              <p className="text-slate-600 max-w-md mb-8 leading-relaxed">
                 대한민국 최고의 소방안전 전문가를 양성하는 프리미엄 평생교육원입니다. 
                 최신 시설과 실무 중심의 커리큘럼으로 여러분의 꿈을 지원합니다.
               </p>
               <div className="flex gap-4">
-                <button className="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center hover:bg-purple-600 transition-colors">
+                <button className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-red-600 hover:text-white transition-colors">
                   <Phone className="w-4 h-4" />
                 </button>
-                <button className="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center hover:bg-purple-600 transition-colors">
+                <button className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-red-600 hover:text-white transition-colors">
                   <Mail className="w-4 h-4" />
                 </button>
-                <button className="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center hover:bg-purple-600 transition-colors">
+                <button className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-red-600 hover:text-white transition-colors">
                   <MapPin className="w-4 h-4" />
                 </button>
               </div>
             </div>
             <div>
-              <h3 className="text-white font-bold mb-6">교육 과정</h3>
-              <ul className="space-y-4 text-zinc-500 text-sm">
-                <li className="hover:text-purple-400 cursor-pointer">소방시설관리사</li>
-                <li className="hover:text-purple-400 cursor-pointer">소방안전관리자 1급/2급</li>
-                <li className="hover:text-purple-400 cursor-pointer">위험물안전관리자</li>
-                <li className="hover:text-purple-400 cursor-pointer">기업 맞춤형 안전교육</li>
+              <h3 className="text-slate-900 font-bold mb-6">교육 과정</h3>
+              <ul className="space-y-4 text-slate-600 text-sm">
+                <li className="hover:text-red-600 cursor-pointer">소방시설관리사</li>
+                <li className="hover:text-red-600 cursor-pointer">소방안전관리자 1급/2급</li>
+                <li className="hover:text-red-600 cursor-pointer">위험물안전관리자</li>
+                <li className="hover:text-red-600 cursor-pointer">기업 맞춤형 안전교육</li>
               </ul>
             </div>
             <div>
-              <h3 className="text-white font-bold mb-6">고객 센터</h3>
-              <ul className="space-y-4 text-zinc-500 text-sm">
+              <h3 className="text-slate-900 font-bold mb-6">고객 센터</h3>
+              <ul className="space-y-4 text-slate-600 text-sm">
                 <li>상담전화: 02-123-4567</li>
                 <li>운영시간: 평일 09:00 - 18:00</li>
                 <li>이메일: info@firstsafety.kr</li>
-                <li>주소: 서울특별시 강남구 테헤란로 123</li>
+                <li>주소: 서울특별시 강서구 초원로 16-1 4층 123</li>
               </ul>
             </div>
           </div>
-          <div className="pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-zinc-600">
+          <div className="pt-8 border-t border-sky-200 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
             <p>© 2026 퍼스트안전평생교육원. All Rights Reserved.</p>
             <div className="flex gap-6">
-              <span className="hover:text-zinc-400 cursor-pointer">이용약관</span>
-              <span className="hover:text-zinc-400 cursor-pointer font-bold">개인정보처리방침</span>
-              <span className="hover:text-zinc-400 cursor-pointer">이메일무단수집거부</span>
+              <span className="hover:text-slate-600 cursor-pointer">이용약관</span>
+              <span className="hover:text-slate-600 cursor-pointer font-bold">개인정보처리방침</span>
+              <span className="hover:text-slate-600 cursor-pointer">이메일무단수집거부</span>
             </div>
           </div>
         </div>
@@ -436,15 +436,15 @@ function HomeView({ setActiveTab, posts }: { setActiveTab: any, posts: Post[] })
         <div className="absolute inset-0 z-0">
           <img 
             src="https://images.unsplash.com/photo-1516533075015-a3838414c3ca?auto=format&fit=crop&q=80&w=2000" 
-            className="w-full h-full object-cover opacity-40"
+            className="w-full h-full object-cover opacity-20"
             referrerPolicy="no-referrer"
             alt="Fire Safety Background"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-sky-50 via-sky-50/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-sky-50 to-transparent" />
           {/* Neon Glows */}
-          <div className="absolute top-1/4 -right-20 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px]" />
-          <div className="absolute bottom-1/4 -left-20 w-96 h-96 bg-indigo-600/10 rounded-full blur-[120px]" />
+          <div className="absolute top-1/4 -right-20 w-96 h-96 bg-red-600/20 rounded-full blur-[120px]" />
+          <div className="absolute bottom-1/4 -left-20 w-96 h-96 bg-orange-600/10 rounded-full blur-[120px]" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 w-full">
@@ -454,15 +454,15 @@ function HomeView({ setActiveTab, posts }: { setActiveTab: any, posts: Post[] })
             transition={{ duration: 0.8 }}
             className="max-w-3xl"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-900/30 border border-purple-500/30 text-purple-400 text-xs font-bold uppercase tracking-widest mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-red-600 text-xs font-bold uppercase tracking-widest mb-6">
               <Award className="w-3 h-3" />
               대한민국 No.1 소방안전 교육기관
             </div>
-            <h1 className="text-5xl md:text-7xl font-black text-white mb-8 leading-[1.1] tracking-tight">
+            <h1 className="text-5xl md:text-7xl font-black text-slate-900 mb-8 leading-[1.1] tracking-tight">
               안전의 가치를 <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600">퍼스트</span>에서 시작하세요
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-600">퍼스트</span>에서 시작하세요
             </h1>
-            <p className="text-lg md:text-xl text-zinc-400 mb-10 leading-relaxed max-w-xl">
+            <p className="text-lg md:text-xl text-slate-600 mb-10 leading-relaxed max-w-xl">
               퍼스트안전평생교육원은 실무 중심의 체계적인 커리큘럼과 
               최고의 강사진을 통해 당신을 소방안전 전문가로 이끌어 드립니다.
             </p>
@@ -480,7 +480,7 @@ function HomeView({ setActiveTab, posts }: { setActiveTab: any, posts: Post[] })
       </section>
 
       {/* Stats */}
-      <section className="py-20 bg-zinc-950/50">
+      <section className="py-20 bg-sky-100/50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
@@ -495,11 +495,11 @@ function HomeView({ setActiveTab, posts }: { setActiveTab: any, posts: Post[] })
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="text-center p-6 rounded-2xl bg-zinc-900/30 border border-zinc-800/50"
+                className="text-center p-6 rounded-2xl bg-white border border-sky-100 shadow-sm"
               >
-                <stat.icon className="w-8 h-8 text-purple-600 mx-auto mb-4" />
-                <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
-                <div className="text-sm text-zinc-500">{stat.label}</div>
+                <stat.icon className="w-8 h-8 text-red-600 mx-auto mb-4" />
+                <div className="text-3xl font-bold text-slate-900 mb-1">{stat.value}</div>
+                <div className="text-sm text-slate-500">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -519,7 +519,7 @@ function HomeView({ setActiveTab, posts }: { setActiveTab: any, posts: Post[] })
                 title: '최고의 강사진',
                 desc: '현장 경력 20년 이상의 베테랑 기술사 및 교수진이 직접 강의합니다.',
                 icon: GraduationCap,
-                color: 'from-purple-600 to-indigo-600'
+                color: 'from-red-600 to-orange-600'
               },
               {
                 title: '실무 중심 교육',
@@ -537,13 +537,13 @@ function HomeView({ setActiveTab, posts }: { setActiveTab: any, posts: Post[] })
               <motion.div
                 key={i}
                 whileHover={{ y: -10 }}
-                className="group p-8 rounded-3xl bg-zinc-900/50 border border-zinc-800 hover:border-purple-500/50 transition-all duration-300"
+                className="group p-8 rounded-3xl bg-white border border-sky-100 shadow-sm hover:border-red-500/50 transition-all duration-300"
               >
                 <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center mb-6 bg-gradient-to-br shadow-lg", feature.color)}>
                   <feature.icon className="text-white w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-4 group-hover:text-purple-400 transition-colors">{feature.title}</h3>
-                <p className="text-zinc-500 leading-relaxed">{feature.desc}</p>
+                <h3 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-red-600 transition-colors">{feature.title}</h3>
+                <p className="text-slate-600 leading-relaxed">{feature.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -551,33 +551,33 @@ function HomeView({ setActiveTab, posts }: { setActiveTab: any, posts: Post[] })
       </section>
 
       {/* Latest News */}
-      <section className="py-32 bg-zinc-950/30">
+      <section className="py-32 bg-sky-100/30">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-end justify-between mb-12">
             <div>
-              <h2 className="text-3xl font-bold text-white mb-2">최신 소식</h2>
-              <p className="text-zinc-500">교육원의 새로운 소식과 공지사항을 확인하세요.</p>
+              <h2 className="text-3xl font-bold text-slate-900 mb-2">최신 소식</h2>
+              <p className="text-slate-600">교육원의 새로운 소식과 공지사항을 확인하세요.</p>
             </div>
             <Button variant="ghost" onClick={() => setActiveTab('community')}>전체보기</Button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {posts.slice(0, 4).map((post) => (
-              <Card key={post.id} className="p-6 hover:bg-zinc-900/80 transition-colors cursor-pointer group">
+              <Card key={post.id} className="p-6 hover:bg-white transition-colors cursor-pointer group shadow-sm">
                 <div className="flex items-start gap-4">
                   <div className={cn(
                     "px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider",
-                    post.type === 'notice' ? "bg-purple-900/30 text-purple-400" : "bg-blue-900/30 text-blue-400"
+                    post.type === 'notice' ? "bg-red-50 text-red-600 border border-red-100" : "bg-blue-50 text-blue-600 border border-blue-100"
                   )}>
                     {post.type === 'notice' ? '공지' : '뉴스'}
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-purple-400 transition-colors line-clamp-1">{post.title}</h3>
-                    <p className="text-sm text-zinc-500 line-clamp-1 mb-4">{post.content.replace(/[#*`]/g, '')}</p>
-                    <div className="text-xs text-zinc-600">
+                    <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-red-600 transition-colors line-clamp-1">{post.title}</h3>
+                    <p className="text-sm text-slate-600 line-clamp-1 mb-4">{post.content.replace(/[#*`]/g, '')}</p>
+                    <div className="text-xs text-slate-400">
                       {post.createdAt?.toDate ? post.createdAt.toDate().toLocaleDateString() : '방금 전'}
                     </div>
                   </div>
-                  <ChevronRight className="w-5 h-5 text-zinc-700 group-hover:text-purple-500 transition-colors" />
+                  <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-red-600 transition-colors" />
                 </div>
               </Card>
             ))}
@@ -608,8 +608,8 @@ function CoursesView({ courses }: { courses: Course[] }) {
             className={cn(
               "px-6 py-2 rounded-full text-sm font-medium transition-all",
               activeCategory === cat 
-                ? "bg-purple-600 text-white shadow-[0_0_15px_rgba(138,43,226,0.5)]" 
-                : "bg-zinc-900 text-zinc-500 hover:text-zinc-300 border border-zinc-800"
+                ? "bg-red-600 text-white shadow-[0_0_15px_rgba(220,38,38,0.5)]" 
+                : "bg-white text-slate-500 hover:text-slate-700 border border-sky-100"
             )}
           >
             {cat}
@@ -625,7 +625,7 @@ function CoursesView({ courses }: { courses: Course[] }) {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: i * 0.05 }}
           >
-            <Card className="group hover:border-purple-500/50 transition-all duration-300">
+            <Card className="group hover:border-red-500/50 transition-all duration-300 shadow-sm">
               <div className="aspect-video relative overflow-hidden">
                 <img 
                   src={course.imageUrl || `https://picsum.photos/seed/${course.id}/800/450`} 
@@ -633,19 +633,19 @@ function CoursesView({ courses }: { courses: Course[] }) {
                   referrerPolicy="no-referrer"
                   alt={course.title}
                 />
-                <div className="absolute top-4 left-4 px-3 py-1 bg-black/60 backdrop-blur-md rounded-full text-[10px] font-bold text-purple-400 border border-purple-500/30">
+                <div className="absolute top-4 left-4 px-3 py-1 bg-white/80 backdrop-blur-md rounded-full text-[10px] font-bold text-red-600 border border-red-100">
                   {course.category}
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">{course.title}</h3>
-                <p className="text-zinc-500 text-sm mb-6 line-clamp-2 leading-relaxed">{course.description}</p>
-                <div className="flex items-center justify-between pt-6 border-t border-zinc-800">
-                  <div className="text-xs text-zinc-500 flex items-center gap-1">
+                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-red-600 transition-colors">{course.title}</h3>
+                <p className="text-slate-600 text-sm mb-6 line-clamp-2 leading-relaxed">{course.description}</p>
+                <div className="flex items-center justify-between pt-6 border-t border-sky-100">
+                  <div className="text-xs text-slate-500 flex items-center gap-1">
                     <Users className="w-3 h-3" />
                     수강기간: {course.duration || '상시모집'}
                   </div>
-                  <div className="text-lg font-bold text-purple-500">
+                  <div className="text-lg font-bold text-red-500">
                     {course.price ? `${course.price.toLocaleString()}원` : '상담문의'}
                   </div>
                 </div>
@@ -676,20 +676,20 @@ function CommunityView({ posts }: { posts: Post[] }) {
             <ChevronRight className="w-4 h-4 rotate-180" />
             목록으로 돌아가기
           </Button>
-          <div className="bg-zinc-900/30 border border-zinc-800 rounded-3xl p-8 md:p-12">
+          <div className="bg-white border border-sky-100 rounded-3xl p-8 md:p-12 shadow-sm">
             <div className="flex items-center gap-3 mb-6">
               <span className={cn(
                 "px-3 py-1 rounded-full text-xs font-bold uppercase",
-                selectedPost.type === 'notice' ? "bg-purple-900/30 text-purple-400" : "bg-blue-900/30 text-blue-400"
+                selectedPost.type === 'notice' ? "bg-red-50 text-red-600 border border-red-100" : "bg-blue-50 text-blue-600 border border-blue-100"
               )}>
                 {selectedPost.type === 'notice' ? '공지사항' : '뉴스'}
               </span>
-              <span className="text-zinc-600 text-sm">
+              <span className="text-slate-400 text-sm">
                 {selectedPost.createdAt?.toDate ? selectedPost.createdAt.toDate().toLocaleDateString() : '방금 전'}
               </span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">{selectedPost.title}</h2>
-            <div className="prose prose-invert prose-purple max-w-none">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-8">{selectedPost.title}</h2>
+            <div className="prose prose-red max-w-none">
               <ReactMarkdown>{selectedPost.content}</ReactMarkdown>
             </div>
           </div>
@@ -697,29 +697,29 @@ function CommunityView({ posts }: { posts: Post[] }) {
       ) : (
         <div className="space-y-4">
           {posts.length > 0 ? posts.map((post) => (
-            <Card key={post.id} className="p-6 hover:bg-zinc-900/50 transition-colors cursor-pointer" onClick={() => setSelectedPost(post)}>
+            <Card key={post.id} className="p-6 hover:bg-white transition-colors cursor-pointer shadow-sm" onClick={() => setSelectedPost(post)}>
               <div className="flex items-center gap-6">
-                <div className="hidden sm:flex flex-col items-center justify-center w-16 h-16 rounded-2xl bg-zinc-900 border border-zinc-800 text-zinc-500">
+                <div className="hidden sm:flex flex-col items-center justify-center w-16 h-16 rounded-2xl bg-sky-50 border border-sky-100 text-slate-400">
                   <span className="text-xs uppercase font-bold">{post.createdAt?.toDate ? post.createdAt.toDate().toLocaleString('en-US', { month: 'short' }) : 'MAR'}</span>
-                  <span className="text-xl font-bold text-white">{post.createdAt?.toDate ? post.createdAt.toDate().getDate() : '23'}</span>
+                  <span className="text-xl font-bold text-slate-900">{post.createdAt?.toDate ? post.createdAt.toDate().getDate() : '23'}</span>
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
                     <span className={cn(
                       "text-[10px] font-bold uppercase tracking-wider",
-                      post.type === 'notice' ? "text-purple-500" : "text-blue-500"
+                      post.type === 'notice' ? "text-red-600" : "text-blue-600"
                     )}>
                       {post.type === 'notice' ? 'Notice' : 'News'}
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-2">{post.title}</h3>
-                  <p className="text-zinc-500 text-sm line-clamp-1">{post.content.replace(/[#*`]/g, '')}</p>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">{post.title}</h3>
+                  <p className="text-slate-600 text-sm line-clamp-1">{post.content.replace(/[#*`]/g, '')}</p>
                 </div>
-                <ChevronRight className="w-5 h-5 text-zinc-700" />
+                <ChevronRight className="w-5 h-5 text-slate-300" />
               </div>
             </Card>
           )) : (
-            <div className="text-center py-20 text-zinc-600">등록된 게시물이 없습니다.</div>
+            <div className="text-center py-20 text-slate-400">등록된 게시물이 없습니다.</div>
           )}
         </div>
       )}
@@ -734,40 +734,40 @@ function SupportView() {
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         <div>
-          <h3 className="text-2xl font-bold text-white mb-8">자주 묻는 질문</h3>
+          <h3 className="text-2xl font-bold text-slate-900 mb-8">자주 묻는 질문</h3>
           <div className="space-y-4">
             {[
               { q: '수강 신청은 어떻게 하나요?', a: '홈페이지에서 로그인 후 원하는 교육 과정을 선택하여 신청하실 수 있습니다. 단체 수강의 경우 고객센터로 별도 문의 바랍니다.' },
               { q: '자격증 시험 응시 자격이 궁금합니다.', a: '각 자격증마다 응시 자격이 다릅니다. 상세 페이지의 응시 자격 안내를 확인하시거나 상담 신청을 남겨주세요.' },
               { q: '교육비 환불 규정은 어떻게 되나요?', a: '평생교육법 시행령에 의거하여 교육 시작 전에는 전액 환불이 가능하며, 시작 후에는 경과 시간에 따라 차등 환불됩니다.' }
             ].map((faq, i) => (
-              <details key={i} className="group bg-zinc-900/30 border border-zinc-800 rounded-2xl p-6 cursor-pointer">
-                <summary className="flex items-center justify-between font-bold text-white list-none">
+              <details key={i} className="group bg-white border border-sky-100 rounded-2xl p-6 cursor-pointer shadow-sm">
+                <summary className="flex items-center justify-between font-bold text-slate-900 list-none">
                   {faq.q}
-                  <ChevronRight className="w-5 h-5 text-zinc-600 group-open:rotate-90 transition-transform" />
+                  <ChevronRight className="w-5 h-5 text-slate-300 group-open:rotate-90 transition-transform" />
                 </summary>
-                <p className="mt-4 text-zinc-500 text-sm leading-relaxed">{faq.a}</p>
+                <p className="mt-4 text-slate-600 text-sm leading-relaxed">{faq.a}</p>
               </details>
             ))}
           </div>
         </div>
         
-        <Card className="p-8 md:p-10">
-          <h3 className="text-2xl font-bold text-white mb-8">1:1 문의하기</h3>
+        <Card className="p-8 md:p-10 shadow-sm">
+          <h3 className="text-2xl font-bold text-slate-900 mb-8">1:1 문의하기</h3>
           <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="text-xs font-bold text-zinc-500 uppercase tracking-wider">이름</label>
-                <input type="text" className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-600 transition-colors" placeholder="홍길동" />
+                <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">이름</label>
+                <input type="text" className="w-full bg-white border border-sky-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-red-600 transition-colors" placeholder="홍길동" />
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-bold text-zinc-500 uppercase tracking-wider">연락처</label>
-                <input type="text" className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-600 transition-colors" placeholder="010-0000-0000" />
+                <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">연락처</label>
+                <input type="text" className="w-full bg-white border border-sky-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-red-600 transition-colors" placeholder="010-0000-0000" />
               </div>
             </div>
             <div className="space-y-2">
-              <label className="text-xs font-bold text-zinc-500 uppercase tracking-wider">문의 유형</label>
-              <select className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-600 transition-colors appearance-none">
+              <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">문의 유형</label>
+              <select className="w-full bg-white border border-sky-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-red-600 transition-colors appearance-none">
                 <option>교육 과정 문의</option>
                 <option>수강료 및 결제 문의</option>
                 <option>자격증 취득 문의</option>
@@ -775,8 +775,8 @@ function SupportView() {
               </select>
             </div>
             <div className="space-y-2">
-              <label className="text-xs font-bold text-zinc-500 uppercase tracking-wider">내용</label>
-              <textarea rows={4} className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-600 transition-colors resize-none" placeholder="문의하실 내용을 입력해 주세요." />
+              <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">내용</label>
+              <textarea rows={4} className="w-full bg-white border border-sky-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-red-600 transition-colors resize-none" placeholder="문의하실 내용을 입력해 주세요." />
             </div>
             <Button className="w-full h-14 text-lg">문의 제출하기</Button>
           </form>
@@ -850,7 +850,7 @@ function AdminDashboard({ courses, posts }: { courses: Course[], posts: Post[] }
             onClick={() => setView('overview')}
             className={cn(
               "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all",
-              view === 'overview' ? "bg-purple-600 text-white shadow-lg" : "text-zinc-500 hover:bg-zinc-900"
+              view === 'overview' ? "bg-red-600 text-white shadow-lg" : "text-slate-500 hover:bg-sky-100"
             )}
           >
             <LayoutDashboard className="w-5 h-5" />
@@ -860,7 +860,7 @@ function AdminDashboard({ courses, posts }: { courses: Course[], posts: Post[] }
             onClick={() => setView('courses')}
             className={cn(
               "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all",
-              view === 'courses' ? "bg-purple-600 text-white shadow-lg" : "text-zinc-500 hover:bg-zinc-900"
+              view === 'courses' ? "bg-red-600 text-white shadow-lg" : "text-slate-500 hover:bg-sky-100"
             )}
           >
             <BookOpen className="w-5 h-5" />
@@ -870,7 +870,7 @@ function AdminDashboard({ courses, posts }: { courses: Course[], posts: Post[] }
             onClick={() => setView('posts')}
             className={cn(
               "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all",
-              view === 'posts' ? "bg-purple-600 text-white shadow-lg" : "text-zinc-500 hover:bg-zinc-900"
+              view === 'posts' ? "bg-red-600 text-white shadow-lg" : "text-slate-500 hover:bg-sky-100"
             )}
           >
             <FileText className="w-5 h-5" />
@@ -882,19 +882,19 @@ function AdminDashboard({ courses, posts }: { courses: Course[], posts: Post[] }
         <div className="flex-1">
           {view === 'overview' && (
             <div className="space-y-8">
-              <h2 className="text-3xl font-bold text-white">관리자 대시보드</h2>
+              <h2 className="text-3xl font-bold text-slate-900">관리자 대시보드</h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <Card className="p-6">
-                  <div className="text-zinc-500 text-xs font-bold uppercase mb-2">전체 교육 과정</div>
-                  <div className="text-4xl font-bold text-white">{courses.length}</div>
+                <Card className="p-6 shadow-sm">
+                  <div className="text-slate-400 text-xs font-bold uppercase mb-2">전체 교육 과정</div>
+                  <div className="text-4xl font-bold text-slate-900">{courses.length}</div>
                 </Card>
-                <Card className="p-6">
-                  <div className="text-zinc-500 text-xs font-bold uppercase mb-2">전체 게시물</div>
-                  <div className="text-4xl font-bold text-white">{posts.length}</div>
+                <Card className="p-6 shadow-sm">
+                  <div className="text-slate-400 text-xs font-bold uppercase mb-2">전체 게시물</div>
+                  <div className="text-4xl font-bold text-slate-900">{posts.length}</div>
                 </Card>
-                <Card className="p-6">
-                  <div className="text-zinc-500 text-xs font-bold uppercase mb-2">신규 문의</div>
-                  <div className="text-4xl font-bold text-purple-500">0</div>
+                <Card className="p-6 shadow-sm">
+                  <div className="text-slate-400 text-xs font-bold uppercase mb-2">신규 문의</div>
+                  <div className="text-4xl font-bold text-red-500">0</div>
                 </Card>
               </div>
             </div>
@@ -903,7 +903,7 @@ function AdminDashboard({ courses, posts }: { courses: Course[], posts: Post[] }
           {view === 'courses' && (
             <div className="space-y-6">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-white">교육 과정 관리</h2>
+                <h2 className="text-2xl font-bold text-slate-900">교육 과정 관리</h2>
                 <Button onClick={() => setIsEditingCourse({})}>
                   <Plus className="w-4 h-4" />
                   새 과정 추가
@@ -911,19 +911,19 @@ function AdminDashboard({ courses, posts }: { courses: Course[], posts: Post[] }
               </div>
 
               {isEditingCourse && (
-                <Card className="p-6 border-purple-500/30">
-                  <h3 className="text-lg font-bold text-white mb-6">{isEditingCourse.id ? '과정 수정' : '새 과정 등록'}</h3>
+                <Card className="p-6 border-red-500/30 shadow-sm">
+                  <h3 className="text-lg font-bold text-slate-900 mb-6">{isEditingCourse.id ? '과정 수정' : '새 과정 등록'}</h3>
                   <form onSubmit={handleSaveCourse} className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <input 
-                        className="bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-2 text-white" 
+                        className="bg-white border border-sky-200 rounded-lg px-4 py-2 text-slate-900" 
                         placeholder="과정명" 
                         value={isEditingCourse.title || ''} 
                         onChange={e => setIsEditingCourse({...isEditingCourse, title: e.target.value})}
                         required
                       />
                       <input 
-                        className="bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-2 text-white" 
+                        className="bg-white border border-sky-200 rounded-lg px-4 py-2 text-slate-900" 
                         placeholder="카테고리" 
                         value={isEditingCourse.category || ''} 
                         onChange={e => setIsEditingCourse({...isEditingCourse, category: e.target.value})}
@@ -931,20 +931,20 @@ function AdminDashboard({ courses, posts }: { courses: Course[], posts: Post[] }
                       />
                       <input 
                         type="number"
-                        className="bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-2 text-white" 
+                        className="bg-white border border-sky-200 rounded-lg px-4 py-2 text-slate-900" 
                         placeholder="수강료 (숫자만)" 
                         value={isEditingCourse.price || ''} 
                         onChange={e => setIsEditingCourse({...isEditingCourse, price: Number(e.target.value)})}
                       />
                       <input 
-                        className="bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-2 text-white" 
+                        className="bg-white border border-sky-200 rounded-lg px-4 py-2 text-slate-900" 
                         placeholder="교육 기간 (예: 4주)" 
                         value={isEditingCourse.duration || ''} 
                         onChange={e => setIsEditingCourse({...isEditingCourse, duration: e.target.value})}
                       />
                     </div>
                     <textarea 
-                      className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-2 text-white" 
+                      className="w-full bg-white border border-sky-200 rounded-lg px-4 py-2 text-slate-900" 
                       placeholder="과정 설명" 
                       rows={3}
                       value={isEditingCourse.description || ''} 
@@ -952,7 +952,7 @@ function AdminDashboard({ courses, posts }: { courses: Course[], posts: Post[] }
                       required
                     />
                     <input 
-                      className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-2 text-white" 
+                      className="w-full bg-white border border-sky-200 rounded-lg px-4 py-2 text-slate-900" 
                       placeholder="이미지 URL" 
                       value={isEditingCourse.imageUrl || ''} 
                       onChange={e => setIsEditingCourse({...isEditingCourse, imageUrl: e.target.value})}
@@ -967,14 +967,14 @@ function AdminDashboard({ courses, posts }: { courses: Course[], posts: Post[] }
 
               <div className="space-y-2">
                 {courses.map(course => (
-                  <div key={course.id} className="flex items-center justify-between p-4 bg-zinc-900/30 border border-zinc-800 rounded-xl">
+                  <div key={course.id} className="flex items-center justify-between p-4 bg-white border border-sky-100 rounded-xl shadow-sm">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-lg bg-zinc-800 overflow-hidden">
+                      <div className="w-12 h-12 rounded-lg bg-sky-50 overflow-hidden">
                         <img src={course.imageUrl || `https://picsum.photos/seed/${course.id}/100/100`} className="w-full h-full object-cover" referrerPolicy="no-referrer" alt="" />
                       </div>
                       <div>
-                        <div className="text-white font-bold">{course.title}</div>
-                        <div className="text-xs text-zinc-500">{course.category} | {course.price?.toLocaleString()}원</div>
+                        <div className="text-slate-900 font-bold">{course.title}</div>
+                        <div className="text-xs text-slate-500">{course.category} | {course.price?.toLocaleString()}원</div>
                       </div>
                     </div>
                     <div className="flex gap-2">
@@ -994,7 +994,7 @@ function AdminDashboard({ courses, posts }: { courses: Course[], posts: Post[] }
           {view === 'posts' && (
             <div className="space-y-6">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-white">게시물 관리</h2>
+                <h2 className="text-2xl font-bold text-slate-900">게시물 관리</h2>
                 <Button onClick={() => setIsEditingPost({ type: 'notice' })}>
                   <Plus className="w-4 h-4" />
                   새 게시물 작성
@@ -1002,19 +1002,19 @@ function AdminDashboard({ courses, posts }: { courses: Course[], posts: Post[] }
               </div>
 
               {isEditingPost && (
-                <Card className="p-6 border-purple-500/30">
-                  <h3 className="text-lg font-bold text-white mb-6">{isEditingPost.id ? '게시물 수정' : '새 게시물 작성'}</h3>
+                <Card className="p-6 border-red-500/30 shadow-sm">
+                  <h3 className="text-lg font-bold text-slate-900 mb-6">{isEditingPost.id ? '게시물 수정' : '새 게시물 작성'}</h3>
                   <form onSubmit={handleSavePost} className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <input 
-                        className="bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-2 text-white" 
+                        className="bg-white border border-sky-200 rounded-lg px-4 py-2 text-slate-900" 
                         placeholder="제목" 
                         value={isEditingPost.title || ''} 
                         onChange={e => setIsEditingPost({...isEditingPost, title: e.target.value})}
                         required
                       />
                       <select 
-                        className="bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-2 text-white" 
+                        className="bg-white border border-sky-200 rounded-lg px-4 py-2 text-slate-900" 
                         value={isEditingPost.type || 'notice'} 
                         onChange={e => setIsEditingPost({...isEditingPost, type: e.target.value as any})}
                       >
@@ -1023,7 +1023,7 @@ function AdminDashboard({ courses, posts }: { courses: Course[], posts: Post[] }
                       </select>
                     </div>
                     <textarea 
-                      className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-2 text-white font-mono text-sm" 
+                      className="w-full bg-white border border-sky-200 rounded-lg px-4 py-2 text-slate-900 font-mono text-sm" 
                       placeholder="내용 (Markdown 지원)" 
                       rows={10}
                       value={isEditingPost.content || ''} 
@@ -1040,17 +1040,17 @@ function AdminDashboard({ courses, posts }: { courses: Course[], posts: Post[] }
 
               <div className="space-y-2">
                 {posts.map(post => (
-                  <div key={post.id} className="flex items-center justify-between p-4 bg-zinc-900/30 border border-zinc-800 rounded-xl">
+                  <div key={post.id} className="flex items-center justify-between p-4 bg-white border border-sky-100 rounded-xl shadow-sm">
                     <div className="flex items-center gap-4">
                       <div className={cn(
                         "px-2 py-1 rounded text-[10px] font-bold uppercase",
-                        post.type === 'notice' ? "bg-purple-900/30 text-purple-400" : "bg-blue-900/30 text-blue-400"
+                        post.type === 'notice' ? "bg-red-50 text-red-600 border border-red-100" : "bg-blue-50 text-blue-600 border border-blue-100"
                       )}>
                         {post.type === 'notice' ? '공지' : '뉴스'}
                       </div>
                       <div>
-                        <div className="text-white font-bold line-clamp-1">{post.title}</div>
-                        <div className="text-xs text-zinc-500">{post.createdAt?.toDate ? post.createdAt.toDate().toLocaleDateString() : '방금 전'}</div>
+                        <div className="text-slate-900 font-bold line-clamp-1">{post.title}</div>
+                        <div className="text-xs text-slate-400">{post.createdAt?.toDate ? post.createdAt.toDate().toLocaleDateString() : '방금 전'}</div>
                       </div>
                     </div>
                     <div className="flex gap-2">
