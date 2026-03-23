@@ -260,7 +260,7 @@ export default function App() {
               <Shield className="text-white w-6 h-6" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-white tracking-tight leading-none">퍼스트안전</h1>
+              <h1 className="text-xl font-bold text-black tracking-tight leading-none">퍼스트안전</h1>
               <p className="text-[10px] text-red-500 font-medium tracking-widest uppercase mt-1">Lifelong Education</p>
             </div>
           </div>
