@@ -1,0 +1,57 @@
+{
+  "entities": {
+    "Course": {
+      "title": "교육 과정",
+      "description": "소방안전 교육 과정 정보",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "과정명" },
+        "description": { "type": "string", "description": "과정 설명" },
+        "category": { "type": "string", "description": "카테고리 (예: 소방시설관리, 안전관리자)" },
+        "price": { "type": "number", "description": "수강료" },
+        "duration": { "type": "string", "description": "교육 기간" },
+        "imageUrl": { "type": "string", "description": "대표 이미지 URL" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "description", "category"]
+    },
+    "Post": {
+      "title": "공지사항 및 뉴스",
+      "description": "교육원 소식 및 공지사항",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "제목" },
+        "content": { "type": "string", "description": "내용 (Markdown)" },
+        "author": { "type": "string", "description": "작성자" },
+        "type": { "type": "string", "enum": ["notice", "news"], "description": "포스트 타입" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "content", "type"]
+    },
+    "User": {
+      "title": "사용자 정보",
+      "description": "관리자 및 학생 정보",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["admin", "student"] },
+        "displayName": { "type": "string" }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/courses/{courseId}": {
+      "schema": "Course",
+      "description": "교육 과정 목록"
+    },
+    "/posts/{postId}": {
+      "schema": "Post",
+      "description": "공지사항 및 뉴스 목록"
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "사용자 프로필"
+    }
+  }
+}

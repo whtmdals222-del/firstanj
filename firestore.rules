@@ -1,0 +1,70 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    // Collection: courses
+    // - title: string (required)
+    // - description: string (required)
+    // - category: string (required)
+    // - price: number
+    // - duration: string
+    // - imageUrl: string
+    // - createdAt: timestamp
+    //
+    // Collection: posts
+    // - title: string (required)
+    // - content: string (required)
+    // - author: string
+    // - type: string (notice/news)
+    // - createdAt: timestamp
+    //
+    // Collection: users
+    // - email: string (required)
+    // - role: string (admin/student)
+    // - displayName: string
+    // ===============================================================
+
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && 
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+         request.auth.token.email == "whtmdals222@gmail.com");
+    }
+
+    function isValidCourse(data) {
+      return data.keys().hasAll(['title', 'description', 'category']) &&
+             data.title is string && data.title.size() > 0 && data.title.size() < 200 &&
+             data.description is string && data.description.size() > 0 &&
+             data.category is string;
+    }
+
+    function isValidPost(data) {
+      return data.keys().hasAll(['title', 'content', 'type']) &&
+             data.title is string && data.title.size() > 0 && data.title.size() < 300 &&
+             data.content is string &&
+             data.type in ['notice', 'news'];
+    }
+
+    // Rules
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (request.auth.uid == userId || isAdmin());
+      allow write: if isAuthenticated() && (request.auth.uid == userId || isAdmin());
+    }
+
+    match /courses/{courseId} {
+      allow read: if true; // Publicly readable
+      allow write: if isAdmin();
+    }
+
+    match /posts/{postId} {
+      allow read: if true; // Publicly readable
+      allow write: if isAdmin();
+    }
+  }
+}
